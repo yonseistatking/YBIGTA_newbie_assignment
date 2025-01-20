@@ -37,18 +37,6 @@ fi
 # 필요한 패키지 설치
 pip install mypy
 
-# Submission 폴더의 파일 변환 (cp949 -> utf-8)
-echo "파일 인코딩 변환을 시작합니다."
-for file in submission/*.py; do
-    if file "$file" | grep -q "ISO-8859" || file "$file" | grep -q "CP949"; then
-        echo "$file 를 UTF-8로 변환 중..."
-        iconv -f cp949 -t utf-8 "$file" -o "$file.tmp" && mv "$file.tmp" "$file"
-        echo "$file 변환 완료."
-    else
-        echo "$file 은(는) 변환이 필요하지 않습니다."
-    fi
-done
-
 # mypy 테스트 실행
 echo "mypy 테스트를 시작합니다."
 for file in submission/*.py; do
